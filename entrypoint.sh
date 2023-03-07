@@ -16,7 +16,7 @@ fi
 
 if [ -n "$3" ]; then
   config_file=$(basename $3)
-  docker_cmd="docker run -d --name gha_aerospike -e MEM_GB=2 -p $1:3000 -p 3001:3001 -p 3002:3002 -p 3003:3003 \
+  docker_cmd="docker run -d --name gha_aerospike -e MEM_GB=2 -p $1:3000 -p 3001:3001 -p 3002:3002 -p 3003:3003 -p4333:4333 \
   $mount $image --config-file /opt/aerospike/etc/$config_file "
 else
   docker_cmd="docker run -d --name gha_aerospike -p $1:3000 -e MEM_GB=2 -p 3001:3001 -p 3002:3002 -p 3003:3003 -p4333:4333 $image"
