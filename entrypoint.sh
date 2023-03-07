@@ -7,7 +7,6 @@ if [ -n "$3" ] || [ -n "$4" ]; then
   config_dir="/github/workspace/$(dirname $3)"
   mount="-v /home/runner/work/firefly/firefly/.github/aerospike/:/opt/aerospike/etc"
   echo "list config dir" ls $config_dir
-  find /github/workspace
 fi
 
 if [ -n "$4" ]; then
@@ -26,7 +25,8 @@ else
 fi
 
 echo $docker_cmd
-
+echo "will list /opt/aerospike/"
+docker run -t -i $mount $image find /opt/aerospike/
 ctr_id=$($docker_cmd)
 echo will sleep 10 seconds and check $ctr_id
 sleep 10
