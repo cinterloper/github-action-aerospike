@@ -26,7 +26,7 @@ fi
 
 echo $docker_cmd
 echo "will list /opt/aerospike/"
-docker run -t -i $mount $image find /opt/aerospike/
+docker run $mount $image find /opt/aerospike/
 ctr_id=$($docker_cmd)
 echo will sleep 10 seconds and check $ctr_id
 sleep 10
