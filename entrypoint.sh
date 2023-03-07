@@ -24,4 +24,7 @@ fi
 
 echo $docker_cmd
 
-sh -c "$docker_cmd"
+ctr_id=$($docker_cmd)
+echo will sleep 10 seconds and check $ctr_id
+sleep 10
+docker logs $ctr_id
