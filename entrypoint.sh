@@ -5,7 +5,7 @@ set -e
 mount=""
 if [ -n "$3" ] || [ -n "$4" ]; then
   config_dir="/github/workspace/$(dirname $3)"
-  mount="-v $config_dir:/opt/aerospike/etc"
+  mount="-v /home/runner/work/firefly/firefly/.github/aerospike/:/opt/aerospike/etc"
   echo "list config dir" ls $config_dir
   find /github/workspace
 fi
