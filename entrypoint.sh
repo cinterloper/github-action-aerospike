@@ -1,10 +1,12 @@
 #!/bin/sh
+set -x
 set -e
 
 mount=""
 if [ -n "$3" ] || [ -n "$4" ]; then
   config_dir="/github/workspace/$(dirname $3)"
   mount="-v $config_dir:/opt/aerospike/etc"
+  echo "list config dir" ls $config_dir
 fi
 
 if [ -n "$4" ]; then
