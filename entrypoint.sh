@@ -19,7 +19,7 @@ if [ -n "$3" ]; then
   docker_cmd="docker run -d --name gha_aerospike -p $1:3000 -p 3001:3001 -p 3002:3002 -p 3003:3003 \
   $mount --config-file /opt/aerospike/etc/$config_file $image"
 else
-  docker_cmd="docker run -d --name gha_aerospike -p $1:3000 -p 3001:3001 -p 3002:3002 -p 3003:3003 $image"
+  docker_cmd="docker run -d --name gha_aerospike -p $1:3000 -p 3001:3001 -p 3002:3002 -p 3003:3003 -p4333:4333 $image"
 fi
 
 echo $docker_cmd
