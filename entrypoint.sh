@@ -11,7 +11,7 @@ fi
 
 if [ -n "$4" ]; then
   feature_key_string=$(basename $4)
-  echo "$feature_key_string" | base64 -d > FEATURE_KEY_FILE=/home/runner/work/firefly/firefly/.github/aerospike/features.conf
+  echo "$feature_key_string" | base64 -d > /home/runner/work/firefly/firefly/.github/aerospike/features.conf
   image="-e \"FEATURE_KEY_FILE=/opt/aerospike/etc/features.conf\" aerospike/aerospike-server-enterprise:$2"
 else
   image="aerospike/aerospike-server:$2"
