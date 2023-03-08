@@ -30,3 +30,4 @@ runs:
     - ${{ inputs.server-version }}
     - ${{ inputs.config-file }}
     - ${{ inputs.feature-key-b64 }}
+    - ${{ inputs.firefly-path }}

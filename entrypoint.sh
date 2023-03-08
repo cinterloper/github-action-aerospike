@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 set -x
 set -e
 AEROSPIKE_PORT="$1"
@@ -19,16 +19,12 @@ ls /home/
 ls /opt
 
 
-mount="-v $FIREFLY_PATH/.github/aerospike:/opt/aerospike/etc"
 
 docker run -v "$FIREFLY_PATH":"$FIREFLY_PATH" -e FIREFLY_PATH -e AEROSPIKE_FETURES_B64 ubuntu:22.04 bash -x -c 'echo $AEROSPIKE_FETURES_B64 | base64 -d > $FIREFLY_PATH/.github/aerospike/features.conf'
 
-echo "$feature_key_string" | base64 -d > /github/workspace/.github/aerospike/features.conf
-
-
-echo $docker_cmd
 echo "will list /opt/aerospike/ with same mounts"
 docker run -v $FIREFLY_PATH/.github/aerospike:/opt/aerospike/etc ubuntu:22.04 bash -x -c 'ls /opt; find /opt/aerospike/'
+
 docker run -d --name gha_aerospike --rm \
   -e MEM_GB=2 \
   -e FEATURE_KEY_FILE=/opt/aerospike/etc/features.conf
