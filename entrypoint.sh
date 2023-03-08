@@ -18,7 +18,11 @@ echo "our /home"
 find /home/
 
 echo "host /home"
-docker run -v "$FIREFLY_PATH":"$FIREFLY_PATH" -e FIREFLY_PATH -e AEROSPIKE_FETURES_B64 ubuntu:22.04 bash -x -c 'find /home'
+ENTRY_COUNT=$(docker run -v "$FIREFLY_PATH":"$FIREFLY_PATH" -e FIREFLY_PATH -e AEROSPIKE_FETURES_B64 ubuntu:22.04 bash -x -c 'ls $FIREFLY_PATH')
+
+if [ $ENTRY_COUNT -eq 0 ]; then
+  docker run -e CUR_DIR=$(pwd) -v$(pwd):$(pwd) -v "$FIREFLY_PATH":"$FIREFLY_PATH" -e FIREFLY_PATH -e AEROSPIKE_FETURES_B64 ubuntu:22.04 bash -x -c "cp -a $CUR_DIR/* $FIREFLY_PATH/"
+fi
 
 if [ -d /github ]; then
   echo "our /github"
