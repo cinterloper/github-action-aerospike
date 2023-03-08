@@ -27,7 +27,7 @@ docker run -v $FIREFLY_PATH/.github/aerospike:/opt/aerospike/etc ubuntu:22.04 ba
 
 docker run -d --name gha_aerospike --rm \
   -e MEM_GB=2 \
-  -e FEATURE_KEY_FILE=/opt/aerospike/etc/features.conf
+  -e FEATURE_KEY_FILE=/opt/aerospike/etc/features.conf \
   -p $AEROSPIKE_PORT:3000 \
   -p 3001:3001 \
   -p 3002:3002 \
