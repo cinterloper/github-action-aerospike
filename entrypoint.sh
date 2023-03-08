@@ -10,8 +10,9 @@ if [ -n "$3" ] || [ -n "$4" ]; then
 fi
 
 if [ -n "$4" ]; then
-  feature_key_file=$(basename $4)
-  image="-e \"FEATURE_KEY_FILE=/opt/aerospike/etc/$feature_key_file\" aerospike/aerospike-server-enterprise:$2"
+  feature_key_string=$(basename $4)
+  echo "$feature_key_string" | base64 -d > FEATURE_KEY_FILE=/opt/aerospike/etc/features.conf
+  image="-e \"FEATURE_KEY_FILE=/opt/aerospike/etc/features.conf\" aerospike/aerospike-server-enterprise:$2"
 else
   image="aerospike/aerospike-server:$2"
 fi

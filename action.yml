@@ -18,8 +18,8 @@ inputs:
     description: 'Aerospike configuration file'
     required: false
     default: ''
-  feature-key-file:
-    description: 'Aerospike EE feature key file'
+  feature-key-b64:
+    description: 'Aerospike EE feature key file as base64 string'
     required: false
     default: ''
 runs:
@@ -29,4 +29,4 @@ runs:
     - ${{ inputs.port }}
     - ${{ inputs.server-version }}
     - ${{ inputs.config-file }}
-    - ${{ inputs.feature-key-file }}
+    - ${{ inputs.feature-key-b64 }}
