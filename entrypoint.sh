@@ -24,8 +24,9 @@ if [ -d /github ]; then
   echo "our /github"
   ls /github
 fi
+
 echo "host /github"
-docker run -v /github:/github ubuntu:22.04 bash -x -c "ls /github"
+docker run -v /github:/github ubuntu:22.04 bash -x -c "find /github"
 
 docker run -v "$FIREFLY_PATH":"$FIREFLY_PATH" -e FIREFLY_PATH -e AEROSPIKE_FETURES_B64 ubuntu:22.04 bash -x -c 'echo $AEROSPIKE_FETURES_B64 | base64 -d > $FIREFLY_PATH/.github/aerospike/features.conf'
 
