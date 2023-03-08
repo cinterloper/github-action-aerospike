@@ -20,8 +20,6 @@ find /home/
 echo "host /home"
 docker run -v "$FIREFLY_PATH":"$FIREFLY_PATH" -e FIREFLY_PATH -e AEROSPIKE_FETURES_B64 ubuntu:22.04 bash -x -c 'find /home'
 
-#!/bin/sh
-
 if [ -d /github ]; then
   echo "our /github"
   ls /github
