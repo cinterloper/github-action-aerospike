@@ -16,7 +16,7 @@ docker run -v "$FIREFLY_PATH":"$FIREFLY_PATH" -e FIREFLY_PATH -e AEROSPIKE_FETUR
 echo "will list /opt/aerospike/ with same mounts"
 docker run -v $FIREFLY_PATH/.github/aerospike:/opt/aerospike/etc ubuntu:22.04 bash -x -c 'ls /opt; find /opt/aerospike/'
 
-docker run -d \
+CTR_ID=$(docker run -d \
   -e MEM_GB=2 \
   -e FEATURE_KEY_FILE=/opt/aerospike/etc/features.conf \
   -p $AEROSPIKE_PORT:3000 \
@@ -25,9 +25,9 @@ docker run -d \
   -p 3003:3003 \
   -p 4333:4333 \
   -v $FIREFLY_PATH/.github/aerospike:/opt/aerospike/etc \
-   aerospike/aerospike-server-enterprise:$AEROSPIKE_VERSION --config-file /opt/aerospike/etc/aerospike.conf
+   aerospike/aerospike-server-enterprise:$AEROSPIKE_VERSION --config-file /opt/aerospike/etc/aerospike.conf)
 
 
-echo will sleep 10 seconds and check gha_aerospike container
+echo will sleep 10 seconds and check $CTR_ID container
 sleep 10
-docker logs gha_aerospike
+docker logs $CTR_ID
