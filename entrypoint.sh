@@ -16,7 +16,7 @@ docker run -v "$FIREFLY_PATH":"$FIREFLY_PATH" -e FIREFLY_PATH -e AEROSPIKE_FETUR
 echo "will list /opt/aerospike/ with same mounts"
 docker run -v $FIREFLY_PATH/.github/aerospike:/opt/aerospike/etc ubuntu:22.04 bash -x -c 'ls /opt; find /opt/aerospike/'
 
-docker run -d --name gha_aerospike --rm \
+docker run -d \
   -e MEM_GB=2 \
   -e FEATURE_KEY_FILE=/opt/aerospike/etc/features.conf \
   -p $AEROSPIKE_PORT:3000 \
