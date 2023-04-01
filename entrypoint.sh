@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 set -x
 set -e
 export AEROSPIKE_PORT="$1"
@@ -7,27 +7,13 @@ export AEROSPIKE_CONF="$3"
 export AEROSPIKE_FETURES_B64="$4"
 export FIREFLY_PATH="$5"
 
-env
-pwd
-ls
+echo $AEROSPIKE_FETURES_B64 | base64 -d >$FIREFLY_PATH/.github/aerospike/features.conf
 
-docker run -v "$FIREFLY_PATH":"$FIREFLY_PATH" -e FIREFLY_PATH -e AEROSPIKE_FETURES_B64 ubuntu:22.04 bash -x -c 'echo $AEROSPIKE_FETURES_B64 | base64 -d > $FIREFLY_PATH/.github/aerospike/features.conf'
+virtualenv -p "$(which python3)" /tmp/venv
+source /tmp/venv/bin/activate
+pip3 install -r $FIREFLY_PATH/.github/aerospike/requirements.txt
 
-echo "will list /opt/aerospike/ with same mounts"
-docker run -v $FIREFLY_PATH/.github/aerospike:/opt/aerospike/etc ubuntu:22.04 bash -x -c 'ls /opt; find /opt/aerospike/'
-
-CTR_ID=$(docker run -d \
-  -e MEM_GB=2 \
-  -e FEATURE_KEY_FILE=/opt/aerospike/etc/features.conf \
-  -p $AEROSPIKE_PORT:3000 \
-  -p 3001:3001 \
-  -p 3002:3002 \
-  -p 3003:3003 \
-  -p 4333:4333 \
-  -v $FIREFLY_PATH/.github/aerospike:/opt/aerospike/etc \
-   aerospike/aerospike-server-enterprise:$AEROSPIKE_VERSION --config-file /opt/aerospike/etc/aerospike.conf)
-
-
-echo will sleep 10 seconds and check $CTR_ID container
-sleep 10
-docker logs $CTR_ID
+python3 $FIREFLY_PATH/.github/aerospike/start_cluster.py \
+  --repo_path="$FIREFLY_PATH" \
+  --aerospike_version="AEROSPIKE_VERSION" \
+  --features_file="$FIREFLY_PATH/.github/aerospike/features.conf"
