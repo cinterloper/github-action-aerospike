@@ -15,5 +15,5 @@ pip3 install -r $FIREFLY_PATH/.github/aerospike/requirements.txt
 
 python3 $FIREFLY_PATH/.github/aerospike/start_cluster.py \
   --repo_path="$FIREFLY_PATH" \
-  --aerospike_version="AEROSPIKE_VERSION" \
+  --aerospike_version="$AEROSPIKE_VERSION" \
   --features_file="$FIREFLY_PATH/.github/aerospike/features.conf"
