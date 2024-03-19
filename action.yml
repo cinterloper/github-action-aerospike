@@ -18,6 +18,10 @@ inputs:
     description: 'Aerospike configuration file jinja template base64 string'
     required: false
     default: ''
+  repo-path:
+    description: 'Repository root full path'
+    required: true
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -25,3 +29,4 @@ runs:
     - ${{ inputs.server-version }}
     - ${{ inputs.feature-key-b64 }}
     - ${{ inputs.config-file-b64 }}
+    - ${{ inputs.repo-path }}
