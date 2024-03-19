@@ -5,9 +5,9 @@ export AEROSPIKE_VERSION="$1"
 export AEROSPIKE_FETURES_B64="$2"
 export AEROSPIKE_CONF_TEMPLATE_B64="$3"
 export REPOSITORY_ROOT="$4"
-export LAUNCHER_ARGS="$4"
+export LAUNCHER_ARGS="$5"
 
-
+ls -laht $REPOSITORY_ROOT
 
 echo $AEROSPIKE_FETURES_B64 | base64 -d >$REPOSITORY_ROOT/.github/aerospike/features.conf
 
