@@ -1,33 +1,27 @@
 ---
 name: 'Set up Aerospike Database'
 description: 'Aerospike – the reliable, high performance, distributed database optimized for flash and RAM.'
-author: 'reugn'
+author: 'cinterloper'
 branding:
   icon: 'database'
   color: 'red'
 inputs:
-  port:
-    description: 'Aerospike port'
-    required: false
-    default: '3000'
   server-version:
     description: 'Aerospike server version'
     required: false
     default: 'latest'
-  config-file:
-    description: 'Aerospike configuration file'
-    required: false
-    default: ''
   feature-key-b64:
     description: 'Aerospike EE feature key file as base64 string'
+    required: false
+    default: ''
+  config-file-b64:
+    description: 'Aerospike configuration file jinja template base64 string'
     required: false
     default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.port }}
     - ${{ inputs.server-version }}
-    - ${{ inputs.config-file }}
     - ${{ inputs.feature-key-b64 }}
-    - ${{ inputs.firefly-path }}
+    - ${{ inputs.config-file-b64 }}
