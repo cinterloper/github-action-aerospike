@@ -22,6 +22,10 @@ inputs:
     description: 'Repository root full path'
     required: true
     default: ''
+  launcher-args:
+    description: 'Additional launcher arguments'
+    required: false
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -30,3 +34,5 @@ runs:
     - ${{ inputs.feature-key-b64 }}
     - ${{ inputs.config-file-b64 }}
     - ${{ inputs.repo-path }}
+    - ${{ inputs.launcher-args }}
+
